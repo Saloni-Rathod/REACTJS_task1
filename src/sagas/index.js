@@ -1,6 +1,6 @@
-import { put, takeLatest, all } from 'redux-saga/effects';
-
-function* fetchNews() {
+import { put, takeLatest, all,call, } from 'redux-saga/effects';
+import {orderListReceived,orderListError} from '../actions/index.js';
+function* fetchList() {
   
   const data = [
     
@@ -33,12 +33,26 @@ function* fetchNews() {
   // const json = yield fetch('https://newsapi.org/v1/articles?source=cnn&apiKey=c39a26d9c12f48dba2a5c00e35684ecc')
   //   .then(response => response.json(), );
 
-  yield put({ type: "ORDER_LIST_RECEIVED",
- json:data, });
-}
+
+//   yield put({ type: "ORDER_LIST_RECEIVED",
+//  json:data, });
+
+
+ try{
+  
+ 
+       yield put(orderListReceived(data)); 
+  
+
+   }
+   catch(error){
+     yield put(orderListError(error));
+   }
+ }
+
 
 function* actionWatcher() {
-  yield takeLatest('GET_ORDER_LIST', fetchNews)
+  yield takeLatest('GET_ORDER_LIST', fetchList)
 }
 
 
