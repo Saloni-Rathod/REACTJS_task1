@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import { connect } from 'react-redux'
 import ReactTable from 'react-table';
+import {BootstrapTable, 
+       TableHeaderColumn} from 'react-bootstrap-table';
 
 const imgStyle = {
   hight: 'auto',
@@ -11,7 +13,6 @@ const imgStyle = {
 const articleStyle = {
   width: '70%',
   margin: '50 auto',
-  color: 'olive',
   border: '4px solid Black',
   borderRadius: '5%',
   padding: '20px'
@@ -40,54 +41,46 @@ class OrderList  extends Component {
     
       <div>
          {
-            this.props.article !='NULL' ?(  <table>
-               
-               <tr>
-                 <th>OrderName:</th>
-                 <th>OrderAdd:</th>
-                 <th>orderpin:</th>
-                 <th>Orderstatus:</th>
-                  </tr>
-            </table>)   : (<h1>Orders list</h1>) }
-       {/* <h1>Orders List</h1> */}
+            this.props.article != null?
+          ( 
+            <table style = {articleStyle}>
+              <tr style = {articleStyle}>
+                 <th style = {articleStyle}>OrderName:</th>
+                 <th style = {articleStyle}>OrderAdd:</th>
+                 <th  style = {articleStyle}>orderpin:</th>
+                 <th style = {articleStyle}>Orderstatus:</th>
+             </tr>
+           
+            
+       
         {this.props.article &&
         this.props.article.map((details,index) => {
           return [
            
-            <article style= {articleStyle}>
-             <table>
-               
-            {/* <tr>
-              <th>OrderName:</th>
-              <th>OrderAdd:</th>
-              <th>orderpin:</th>
-              <th>Orderstatus:</th>
-               </tr> */} 
-         {/* <tr>       
-            
-         <th>  <h4 key={index}>{details.ordername}</h4> </th> 
-          <th> <h4 key ={index}>{details.orderadd}</h4> </th>
-            <th><h4 key ={index}>{details.orderpin}</h4></th>
-             <th><h4 key ={index}>{details.orderstatus}</h4></th>
-             </tr>         */}
+      
+             
+           
+    
              
              
              <tr key = {index}>
-                      <td>{details.ordername}</td>
-                      <td>{details.orderadd}</td>
-                      <td>{details.orderpin}</td>
-                       { details.orderstatus=="Approve" ? (<font color="blue"><td>{details.orderstatus}</td></font>) : (<font color="red"><td>{details.orderstatus}</td></font>)}
+                      <td style = {articleStyle} >{details.ordername}</td>
+                      <td style = {articleStyle}>{details.orderadd}</td>
+                      <td style = {articleStyle}>{details.orderpin}</td>
+                       { details.orderstatus=="Approve" ? (<font color="blue"><td style = {articleStyle}>{details.orderstatus}</td></font>) : (<font color="red"><td style = {articleStyle}>{details.orderstatus}</td></font>)}
 
  
                   </tr>
-                  </table>
-             </article>
+                  
+    
             
            
             
           
           ]
-        })} 
+        }) }
+        </table>): (<div></div>)}  
+        
       </div>
     )
   }
